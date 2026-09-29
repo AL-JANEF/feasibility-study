@@ -1,0 +1,20 @@
+Recommended GitHub repository description:
+Evidence-first feasibility analysis for startups, SaaS, services, industrial projects, market entry and investment decisions — with market research, financial modeling, risk analysis, regulatory feasibility and red-team review for Claude Code + Codex.
+
+Recommended GitHub Topics:
+feasibility-study
+business-analysis
+market-research
+financial-modeling
+investment-analysis
+decision-support
+startup-validation
+market-entry
+risk-assessment
+business-strategy
+saas
+manufacturing
+claude-code
+codex
+agent-skills
+python
