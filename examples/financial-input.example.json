@@ -1,0 +1,16 @@
+{
+  "currency": "SAR",
+  "initial_investment": 500000,
+  "opening_cash": 500000,
+  "financing": 0,
+  "discount_rate": 0.12,
+  "years": [
+    {"year": 1, "revenue": 700000, "cogs": 210000, "opex": 520000, "taxes": 0, "capex": 90000, "working_capital_change": 50000, "debt_service": 0},
+    {"year": 2, "revenue": 1350000, "cogs": 378000, "opex": 680000, "taxes": 0, "capex": 50000, "working_capital_change": 70000, "debt_service": 0},
+    {"year": 3, "revenue": 2100000, "cogs": 567000, "opex": 900000, "taxes": 0, "capex": 70000, "working_capital_change": 80000, "debt_service": 0}
+  ],
+  "unit_economics": {
+    "price": 1000, "variable_cost_per_unit": 300, "annual_fixed_costs": 520000,
+    "cac": 500, "monthly_arpu": 1000, "gross_margin": 0.70, "monthly_churn": 0.04
+  }
+}
