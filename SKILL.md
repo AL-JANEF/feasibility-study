@@ -1,224 +1,364 @@
 ---
 name: feasibility-study
 description: >
-  Evidence-first feasibility and investment decision support for business ideas,
-  startups, SaaS, marketplaces, services, industrial/manufacturing projects,
-  expansions, and market-entry decisions. Use for feasibility studies, business
-  viability, investment cases, factory feasibility, market validation, go/no-go
-  analysis, financial feasibility, market sizing, regulatory feasibility,
-  scenario analysis, or whether a project is worth pursuing.
+  Sector-adaptive, evidence-driven feasibility-study system for real commercial,
+  industrial, healthcare, technology, real-estate, agriculture, energy, mining,
+  infrastructure, services, and regulated projects. It researches the exact sector
+  and jurisdiction, builds a bottom-up demand/capacity model, an integrated financial
+  model, scenarios and risks, and produces professional Word, PDF, and Excel deliverables.
 ---
 
-# Feasibility Study
+# Feasibility Study V2
 
-**Decision discipline for ideas before capital is committed.**
+A feasibility study is not a generic report template.
 
-Feasibility Study is not a generic business-plan writer. It is a staged feasibility
-system that converts a decision question into a traceable evidence base, financial
-model, risk case, independent challenge, and a human-owned decision.
+It is an integrated investment decision model in which:
 
-## Non-negotiable rules
+**Demand -> Capacity -> Operations -> Investment -> Financing -> Financial Statements -> Cash -> Return -> Risk -> Decision**
 
-1. **Decision first.** Define the decision, owner, horizon, geography, capital at risk,
-   and success threshold before research.
-2. **Evidence before narrative.** Never let a polished report outrun the evidence.
-3. **No invented numbers.** Every material number is a Fact, Estimate, or Assumption
-   and carries a source/basis.
-4. **Bottom-up sizing is load-bearing.** Top-down market figures corroborate; they do
-   not anchor the model.
-5. **Demand is not market size.** Validate willingness-to-pay, switching behavior,
-   budget, and current substitutes separately.
-6. **Financials are a model, not prophecy.** State drivers, formulas, uncertainty,
-   scenario logic, and sensitivity.
-7. **Regulation is a feasibility dimension.** Permits, ownership restrictions,
-   localization requirements, tax treatment, or sector rules can block a project.
-8. **Technical and operational feasibility are separate.** "Can be built" does not
-   mean "can be operated economically".
-9. **Red-team before verdict.** A final decision cannot issue until challenge findings
-   are reconciled or explicitly carried forward.
-10. **The human owns the decision.** The system produces an evidence-backed decision
-    state and conditions; it does not silently choose for the user.
+Evidence and red-team review are controls over that chain; they are not substitutes for it.
+
+## Primary objective
+
+When the user asks for a feasibility study, behave like a senior feasibility-study team:
+market analyst + sector specialist + operations/technical analyst + regulatory researcher +
+financial modeler + risk reviewer + report designer.
+
+The default end-product for a `standard` or `investment-grade` study is not only Markdown.
+Unless the user explicitly asks otherwise, produce:
+
+1. `deliverables/<project>-feasibility-study.docx`
+2. `deliverables/<project>-feasibility-study.pdf`
+3. `deliverables/<project>-financial-model.xlsx`
+
+The Word and PDF are the professional study report. The Excel workbook is the auditable,
+formula-driven financial model. Verify all three before declaring completion.
+
+## Non-negotiable principles
+
+1. **Classify before researching.**
+   Determine sector, subsector, business model, customer type, jurisdiction, project stage,
+   capital intensity, regulatory intensity, financing type, and the investment decision.
+2. **No one-size-fits-all feasibility study.**
+   A hospital, medical device, factory, hotel, mine, SaaS company, restaurant, and real-estate
+   development must not receive the same technical, operating, regulatory, or financial model.
+3. **Build or load the correct sector pack first.**
+   Read `references/core/sector-routing.md`, then only the relevant sector references.
+   If the subsector is not covered precisely, create a project-specific sector pack from
+   authoritative sources before proceeding.
+4. **Research current facts.**
+   For market size, regulation, licenses, tax, prices, technical standards, sector KPIs,
+   and competitor facts, use live authoritative research tools when available.
+5. **Evidence before narrative.**
+   Material numbers are FACT / ESTIMATE / ASSUMPTION / JUDGMENT / UNKNOWN and carry a basis.
+6. **Market size is not demand.**
+   The commercial forecast must be bottom-up and constrained by realistic acquisition,
+   capacity, timing, pricing, conversion, utilization, retention, or absorption drivers.
+7. **Capacity must constrain revenue.**
+   A factory cannot sell beyond effective production capacity; a hospital beyond service
+   capacity; a hotel beyond room nights; a SaaS team beyond realistic implementation/sales
+   capacity; a logistics operation beyond fleet/warehouse capacity.
+8. **Profit is not cash.**
+   Model revenue recognition, collections, working capital, CAPEX, debt service, tax,
+   financing, and minimum cash separately.
+9. **Three statements for full studies.**
+   Standard/investment-grade work requires a linked Income Statement, Balance Sheet,
+   and Cash Flow Statement unless the project is at a stage where such statements would
+   be knowingly artificial; in that case explain and use a stage-appropriate model.
+10. **No final NPV/IRR from unsupported cash flows.**
+11. **Scenarios change causes, not just percentages.**
+   A downside case changes coherent operating drivers: schedule, price, conversion,
+   utilization, churn, collection days, costs, capacity, etc.
+12. **Use sector-appropriate investment metrics.**
+   NPV/IRR are not the only metrics. Apply DSCR/LLCR, RevPAR, OEE, occupancy, AISC,
+   LCOE, CAC payback, NOI/cap rate, or other metrics only where relevant.
+13. **Regulation can kill feasibility.**
+   Identify competent regulators, required approvals, timelines, professional licenses,
+   ownership/localization restrictions, data/privacy, environment, safety, clinical,
+   product, import/export, and tax obligations as applicable.
+14. **Do not fabricate missing information.**
+   Use UNKNOWN, ranges, scenario bands, or explicit assumptions.
+15. **A polished report is not completion.**
+   The financial model, report, citations, scenarios, and final conclusion must reconcile.
 
 ## Study modes
 
-| Mode | Use | Required depth |
-|---|---|---|
-| `rapid` | Early screen / many ideas | Core evidence, demand, rough economics, blockers, next validation |
-| `standard` | Serious founder/operator decision | Full market, technical, operational, regulatory, financial, scenarios, risk |
-| `investment-grade` | Capital allocation / lender / IC depth | Standard + source redundancy, independent verification, sensitivity, red-team, reconciliation |
+- `rapid`: early screen; no claim of bankability; concise evidence, economics, blockers.
+- `standard`: complete management/founder feasibility study with integrated financial model.
+- `investment-grade`: standard + deeper source redundancy, sector-specialist research,
+  financing analysis, stress tests, red team, reconciliations, and professional deliverables.
 
-`investment-grade` means depth of diligence, not audited financial statements,
-legal/tax opinion, fairness opinion, or assurance engagement.
+`investment-grade` means diligence depth, not an audit, licensed valuation, legal opinion,
+tax opinion, engineering stamp, clinical opinion, or lender approval.
 
-## State machine
+## Required workflow
 
-Run stages in order. Resume from persisted artifacts; do not re-derive settled work.
+### 00 Project classification
+Create `PROJECT_PROFILE.json` containing:
+- project name and description
+- sector / subsector
+- business model
+- B2B / B2C / B2G
+- geography / jurisdiction
+- current stage
+- revenue mechanism
+- financing type
+- study mode
+- language and currency
+- decision being made
 
-```text
-00 Decision Frame
-01 Evidence Plan
-02 Market & Demand
-03 Competition & Positioning
-04 Technical Feasibility
-05 Operational Feasibility
-06 Regulatory & Jurisdiction
-07 Business Model
-08 Financial Model
-09 Scenarios & Sensitivity
-10 Risk & Pre-Mortem
-11 Resources & Implementation
-12 Validation Experiments
-13 Independent Red Team
-14 Evidence Reconciliation
-15 Decision & Final Report
-```
+### 01 Sector-pack selection or synthesis
+Read `references/core/sector-routing.md`.
 
-## Mandatory gates
+Load the exact sector pack. If none fits the project precisely:
+- identify the competent regulator(s);
+- identify authoritative sector/technical standards;
+- identify sector-specific demand and capacity drivers;
+- identify sector-specific CAPEX/OPEX and working-capital mechanics;
+- identify the sector's core KPIs and failure modes;
+- write `01-sector-pack.md`;
+- do not continue until the sector pack is adequate.
 
-- **Gate A — Scope:** Stage 00 complete before external research.
-- **Gate B — Evidence:** no load-bearing claim without an evidence/assumption record.
-- **Gate C — Market:** category boundary, demand evidence, and bottom-up sizing reconciled.
-- **Gate D — Finance:** model inputs trace to assumption/evidence registers.
-- **Gate E — Blockers:** technical, operational, and regulatory blockers resolved,
-  conditioned, or retained.
-- **Gate F — Red team:** all `BLOCKER` objections resolved or carried into the decision.
-- **Gate G — Reconciliation:** report, model, scenarios, and evidence ledger agree.
+### 02 Decision frame and evidence plan
+Define decision owner, alternatives, horizon, capital at risk, return threshold, constraints,
+unknowns, and research plan.
 
-## Loading map
+### 03 Market and demand
+Research:
+- addressable customers/users/population;
+- historical/current demand;
+- demand drivers;
+- segmentation;
+- willingness to pay;
+- procurement/buying process;
+- substitution and switching;
+- competition;
+- pricing;
+- bottom-up obtainable demand;
+- TAM/SAM/SOM only as supporting outputs.
 
-Do not load every reference at once. Read only what the active stage needs.
+### 04 Sales/revenue engine
+Build the sector-appropriate driver tree.
 
-| Stage | Read |
-|---|---|
-| 00–01 | `references/decision-frame.md`, `references/evidence-standard.md` |
-| 02 | `references/research-protocol.md`, `references/market-demand.md` |
-| 03 | `references/competition-positioning.md` |
-| 04 | `references/technical-feasibility.md` |
-| 05 | `references/operational-feasibility.md` |
-| 06 | `references/regulatory-feasibility.md` + jurisdiction profile |
-| 07 | `references/business-model.md` |
-| 08 | `references/financial-model.md` |
-| 09 | `references/scenarios-sensitivity.md` |
-| 10 | `references/risk-premortem.md` |
-| 11 | `references/implementation.md` |
-| 12 | `references/validation-experiments.md` |
-| 13 | `references/red-team.md` |
-| 14–15 | `references/decision-engine.md`, `references/reporting-standard.md` |
+Examples:
+- SaaS: leads -> opportunities -> wins -> implementation -> active ARR -> renewals/expansion/churn.
+- Hotel: rooms x available nights x occupancy x ADR + F&B/other.
+- Hospital: clinics/beds/rooms x utilization x payer/reimbursement mix.
+- Factory: effective capacity x utilization x yield x sell-through x unit price.
+- Real estate: units/GFA x absorption x price/rent x collection schedule.
+- Marketplace: active supply x demand x match/fill rate x GMV x take rate.
+- Contracting: tender pipeline x bid rate x win rate x backlog x execution curve.
 
-For Saudi Arabia also read `references/jurisdictions/saudi-arabia.md`.
+### 05 Technical/capacity feasibility
+Use the selected sector pack. Define design basis, capacity, process/technology, equipment,
+infrastructure, site, utilities, quality, safety, maintenance, scalability, and bottlenecks.
 
-## Research discipline
+### 06 Operations
+Define operating model, staffing, shifts, suppliers, inventory/logistics, service delivery,
+support, quality systems, maintenance, resilience, and operating controls.
 
-When live web/research tools exist:
+### 07 Regulatory / legal / ESG
+Research current rules in the jurisdiction. Record regulator, requirement, applicability,
+evidence/source, approval timeline, cost, dependency, and blocker status.
 
-- Prefer official/primary sources for regulation, statistics, tax, licenses, filings,
-  pricing, and company facts.
-- Pull the current page; do not rely on model memory for time-sensitive rules.
-- Record access date and data/reference period.
-- Cross-check load-bearing numbers with an independent source where practical.
-- If two sources disagree materially, preserve the range and explain the boundary
-  or methodology difference.
-- If a required fact is unavailable, write `UNKNOWN`; never manufacture a point estimate.
+### 08 Organization and manpower
+Build headcount by role, hire date, loaded payroll, productivity/capacity link, training,
+professional licensing, and critical-person dependencies.
 
-If live research is unavailable, do not pretend to have completed a current market or
-regulatory study. Continue only with clearly labelled assumptions/proxies and lower confidence.
+### 09 Implementation schedule
+Create a dependency-aware schedule including licensing, procurement, construction/development,
+validation/commissioning, hiring, sales ramp, launch, and contingency.
 
-## Output contract
+### 10 Investment and CAPEX
+Model land/site, construction, equipment, fit-out, technology, vehicles, professional fees,
+pre-operating costs, startup inventory, capitalized development if justified, contingency,
+interest during construction if relevant, replacement and sustaining CAPEX.
 
-A standard or investment-grade study maintains:
+### 11 OPEX and COGS
+Model direct costs, materials, utilities/cloud, payroll, support, maintenance, rent, logistics,
+commissions, sales/marketing, insurance, professional services, compliance, G&A, and other
+sector-specific costs.
 
-```text
-study/
-  STUDY.json
-  PROGRESS.md
-  00-decision-frame.md
-  01-evidence-plan.md
-  02-market-demand.md
-  03-competition-positioning.md
-  04-technical-feasibility.md
-  05-operational-feasibility.md
-  06-regulatory-feasibility.md
-  07-business-model.md
-  08-financial-model.md
-  09-scenarios-sensitivity.md
-  10-risk-premortem.md
-  11-implementation.md
-  12-validation-experiments.md
-  13-red-team.md
-  14-reconciliation.md
-  15-final-decision.md
-  evidence.jsonl
-  assumptions.jsonl
-  sources.md
-  financial-input.json
-  financial-output.json
-```
+### 12 Working capital
+Model AR, AP, inventory, deposits, deferred revenue/contract liabilities, retentions,
+VAT/tax timing, prepayments, and minimum operating cash where applicable.
 
-Create a study with:
+### 13 Financing
+Model sources and uses, equity timing, debt drawdown, interest, fees, grace period,
+principal repayment, leases, grants, covenants, and refinancing where applicable.
 
-```bash
-python3 scripts/feasibility.py init <study-dir> --mode standard
-```
+### 14 Integrated financial model
+Read `references/core/financial-model-standard.md`.
 
-## Decision states
+For a full study, build:
+- Income Statement
+- Balance Sheet
+- Cash Flow Statement
+- CAPEX/depreciation schedule
+- working-capital schedule
+- debt/equity schedule
+- tax/zakat/VAT schedule where applicable
+- FCFF and FCFE where meaningful
 
-The final state is one of:
+Default time granularity:
+- monthly for the first 24-36 months;
+- annual thereafter to at least year 5;
+- longer/full project life for real estate, energy, mining, infrastructure, concessions,
+  and other long-lived assets.
 
-- `GO`
-- `CONDITIONAL_GO`
-- `VALIDATE_FIRST`
-- `PIVOT`
-- `NO_GO_CURRENT_FORM`
-- `TOO_EARLY`
+### 15 Investment appraisal
+Use applicable metrics:
+NPV, IRR, MIRR, discounted payback, payback, profitability index, ROI/ROIC, break-even,
+DSCR/LLCR/ICR, project IRR/equity IRR, economic NPV/EIRR, risk-adjusted NPV, or
+sector-specific metrics.
 
-Never derive the state from an average score. A single verified fatal blocker can dominate
-many positive dimensions. Confidence in the state is reported separately.
+### 16 Scenarios
+At minimum Base / Downside / Upside. Each scenario changes coherent causal drivers.
 
-## Dimension language
+### 17 Sensitivity and switching values
+Test the variables that can reverse the decision. Calculate, where meaningful, the value
+at which NPV becomes zero, liquidity fails, DSCR breaches, or break-even becomes unreachable.
 
-Signal: `STRONG / ADEQUATE / WEAK / UNKNOWN`.
+### 18 Stress tests
+Use project-specific shocks: delayed launch, slower demand, price compression, cost overrun,
+lower yield/utilization, collection delays, churn, FX/rates, key supplier/customer loss,
+regulatory delay, commodity price shock, or construction delay.
 
-Confidence: `HIGH / MEDIUM / LOW / UNKNOWN`.
+### 19 Risk and pre-mortem
+Probability x impact x trigger x mitigation x owner x residual risk.
+Define explicit kill criteria.
 
-A dimension may be `STRONG` with `LOW` confidence: promising signal, weak evidence.
+### 20 Independent red team
+Attack:
+- demand;
+- pricing;
+- technical design/capacity;
+- operating assumptions;
+- schedule;
+- CAPEX/OPEX;
+- working capital;
+- regulation;
+- financing/liquidity;
+- scenario logic;
+- conclusion.
 
-## Financial tooling
+### 21 Reconciliation and final decision
+Reconcile evidence, Excel, report, scenarios, and risk findings.
 
-```bash
-python3 scripts/feasibility.py finance study/financial-input.json \
-  --output study/financial-output.json
-```
+Decision states:
+- GO
+- CONDITIONAL_GO
+- VALIDATE_FIRST
+- RESCOPE
+- PHASE
+- DELAY
+- PIVOT
+- NO_GO_CURRENT_FORM
+- TOO_EARLY
 
-The bundled engine computes mechanical outputs only from supplied inputs: revenue/cost
-summaries, free-cash-flow proxy, NPV, IRR where solvable, break-even, cumulative cash,
-LTV/CAC when supported, and DSCR when supported.
+Never average scores into a verdict.
 
-A correct calculation from invented inputs is still a bad study. Evidence-gate inputs first.
+## Financial model requirements
 
-## Validation
+For full studies, the following identities are hard gates:
 
-```bash
-python3 scripts/feasibility.py validate study/
-```
+- `Revenue schedule = reported revenue`
+- `Closing cash = opening cash + CFO + CFI + CFF`
+- `Balance-sheet cash = cash-flow closing cash`
+- `Assets = Liabilities + Equity`
+- `Closing debt = opening debt + drawdowns - principal repayments`
+- `Closing PPE = opening PPE + CAPEX - disposals - depreciation`
+- `Closing retained earnings = opening retained earnings + net income - dividends`
 
-For repository self-validation:
+For subscription/contract businesses, explicitly distinguish where applicable:
 
-```bash
-python3 scripts/validate.py
-python3 -m unittest discover -s tests -v
-```
+**Bookings != Billings != Revenue != Cash Collections**
+
+For SaaS, prepaid contracts may create cash before accounting revenue; deferred revenue /
+contract liabilities must be modeled when material.
+
+## Professional deliverables
+
+Read `references/core/artifact-output-standard.md`.
+
+A standard/investment-grade study is not complete until:
+- DOCX exists and is readable;
+- PDF exists and visually matches the DOCX content;
+- XLSX exists, opens, contains formulas/schedules, and reconciles;
+- report numbers match the workbook;
+- citations/source register exists;
+- assumptions register exists;
+- no material placeholder such as TODO/TBD remains without explicit UNKNOWN status.
+
+When the user's language is Arabic:
+- produce Arabic report by default;
+- use RTL formatting in DOCX/PDF;
+- keep technical acronyms where clearer;
+- make tables readable right-to-left;
+- Excel may use English sheet names for interoperability, but labels should be Arabic-friendly.
+
+## Research standard
+
+Prefer, in order:
+1. law/regulator/official statistics/official registries;
+2. audited filings / official company pricing and documents;
+3. recognized multilateral/standards/industry bodies;
+4. reputable sector research;
+5. credible expert/industry evidence;
+6. secondary commentary only as support.
+
+For changing facts, record access date and reference period.
+For critical regulatory or financial claims, seek primary evidence.
+If live research is unavailable, do not claim a current investment-grade study.
 
 ## Stop conditions
 
-Stop and surface the issue instead of continuing when:
-
-- the decision question is materially ambiguous;
-- current regulation is required but cannot be verified;
-- a load-bearing market number is unsupported;
-- financial inputs are internally inconsistent;
-- the revenue identity is not the business the user described;
+Stop and surface the problem if:
+- sector/subsector is materially ambiguous;
+- the project-specific sector pack is missing;
+- current regulation is required and cannot be verified;
+- a load-bearing demand input is unsupported;
+- revenue exceeds realistic capacity without explicit expansion;
+- financial statements fail reconciliation;
+- cash becomes negative without a financing source;
+- a scenario changes outputs without changing underlying drivers;
 - a red-team blocker remains unresolved;
-- the final report contradicts the model or evidence ledger.
+- final report contradicts the workbook.
 
-The purpose is not to finish every study. The purpose is to prevent weak evidence from
-masquerading as a confident decision.
+## Working files
+
+Maintain:
+
+```text
+study/
+  PROJECT_PROFILE.json
+  PROGRESS.md
+  00-project-classification.md
+  01-sector-pack.md
+  02-decision-evidence.md
+  03-market-demand.md
+  04-sales-revenue-engine.md
+  05-technical-capacity.md
+  06-operations.md
+  07-regulatory-legal-esg.md
+  08-organization-manpower.md
+  09-implementation.md
+  10-capex.md
+  11-opex-cogs.md
+  12-working-capital.md
+  13-financing.md
+  14-integrated-financial-model.md
+  15-investment-appraisal.md
+  16-scenarios.md
+  17-sensitivity-switching.md
+  18-stress-tests.md
+  19-risk-premortem.md
+  20-red-team.md
+  21-final-feasibility.md
+  evidence.jsonl
+  assumptions.jsonl
+  sources.md
+  deliverables/
+```
+
+The working Markdown is audit trail. The user's primary deliverables are DOCX, PDF, and XLSX.

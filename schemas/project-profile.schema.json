@@ -1,0 +1,73 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Feasibility Study V2 Project Profile",
+  "type": "object",
+  "required": [
+    "project_name",
+    "sector",
+    "subsector",
+    "business_model",
+    "jurisdiction",
+    "stage",
+    "study_mode",
+    "currency"
+  ],
+  "properties": {
+    "project_name": {
+      "type": "string",
+      "minLength": 1
+    },
+    "description": {
+      "type": "string"
+    },
+    "sector": {
+      "type": "string",
+      "minLength": 1
+    },
+    "subsector": {
+      "type": "string",
+      "minLength": 1
+    },
+    "business_model": {
+      "type": "string",
+      "minLength": 1
+    },
+    "customer_type": {
+      "enum": [
+        "B2B",
+        "B2C",
+        "B2G",
+        "MIXED"
+      ]
+    },
+    "jurisdiction": {
+      "type": "string",
+      "minLength": 1
+    },
+    "stage": {
+      "type": "string",
+      "minLength": 1
+    },
+    "financing_type": {
+      "type": "string"
+    },
+    "study_mode": {
+      "enum": [
+        "rapid",
+        "standard",
+        "investment-grade"
+      ]
+    },
+    "currency": {
+      "type": "string",
+      "minLength": 3
+    },
+    "language": {
+      "type": "string"
+    },
+    "decision_question": {
+      "type": "string"
+    }
+  },
+  "additionalProperties": true
+}
