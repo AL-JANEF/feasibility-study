@@ -1,0 +1,59 @@
+{
+  "version": "2.0-blueprint",
+  "routing_dimensions": [
+    "sector",
+    "subsector",
+    "business_model",
+    "customer_type",
+    "jurisdiction",
+    "capital_intensity",
+    "regulatory_intensity",
+    "project_stage",
+    "financing_type"
+  ],
+  "sector_packs": [
+    "commercial",
+    "services",
+    "saas",
+    "marketplace",
+    "industrial",
+    "food_manufacturing",
+    "healthcare_facility",
+    "medical_device_ivd",
+    "pharma_biotech",
+    "agriculture",
+    "real_estate",
+    "hospitality",
+    "restaurant",
+    "education",
+    "logistics",
+    "energy",
+    "mining",
+    "infrastructure_ppp",
+    "fintech",
+    "contracting_epc_om",
+    "ecommerce",
+    "franchise"
+  ],
+  "medical_subrouting": [
+    "hospital",
+    "clinic",
+    "laboratory",
+    "pharmacy",
+    "home_care",
+    "medical_device",
+    "ivd",
+    "pharma",
+    "biotech",
+    "digital_health"
+  ],
+  "industrial_subrouting": [
+    "discrete_manufacturing",
+    "process_industry",
+    "food",
+    "chemical",
+    "pharma_manufacturing",
+    "heavy_industry",
+    "assembly"
+  ]
+}
